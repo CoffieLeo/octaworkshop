@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>八角輪播雷達動畫（Canvas）</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
+<link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <!-- main -->
+    <section class="main-box">
+        <div class="bg-box"></div>
+        <div class="container">
+            <div class="row py-4">
+                <div class="order-sm-2 col-sm-12 order-md-1 col-md-6 col-lg-6">
+                    <div class="wrap">
+                        <div class="radar" id="radarRoot">
+                            <canvas id="radarCanvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-sm-1 col-sm-12 order-md-2 col-md-5 offset-md-1 col-lg-5 offset-lg-1">
+                    <div class="info-box">
+                        <div class="info-limit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
+                            限額 30 位企業決策者
+                        </div>
+                        <div class="info-title">
+                            <p class="h1">八角框架</p>
+                            <p class="h1">經營實戰成長營</p>
+                        </div>
+                        <div class="info-desc">
+                            <p>用遊戲化思維，讓營收成長、顧客買單、團隊主動創造結果</p>
+                        </div>
+                    </div>
+                    <div class="info-time-box">
+                        <p>這不只是一堂課，而是將你企業的「營收公式」重新設計的兩天一夜策略峰會</p>
+                        <div class="time-box">
+                            <p>席位倒數計時</p>
+                            <div class="limit-time-box">
+                                <ul>
+                                    <li>
+                                        <div class="limit-item days"></div>
+                                        <div class="limit-item">天</div>
+                                    </li>
+                                    <li>
+                                        <div class="limit-item hours"></div>
+                                        <div class="limit-item">時</div>
+                                    </li>
+                                    <li>
+                                        <div class="limit-item minutes"></div>
+                                        <div class="limit-item">分</div>
+                                    </li>
+                                    <li>
+                                        <div class="limit-item seconds"></div>
+                                        <div class="limit-item">秒</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p>僅限 30 位企業決策者｜額滿即止，絕不加開</p>
+                        </div>
+                        <a href="javascript:;" class="info-btn">
+                            立即搶佔稀缺席位 <i class="las la-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 為什麼你的「成長」，總在原地踏步？ -->
+    <section class="grow-up-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">為什麼你的「成長」，總在原地踏步？</div>
+                    <div class="text-box">
+                        <p>市場競爭白熱化，廣告成本飆升，產品差異越來越小。</p>
+                        <p>你是否發現，無論投入多少行銷預算、舉辦多少次促銷活動，營收曲線始終無法擺脫「打折曲線」的宿命？</p>
+                    </div>
+                    <div class="grow-note-box">
+                        活動一停，數字立刻下滑。
+                    </div>
+                    <div class="text-box">
+                        <p>問題不在於團隊不努力，也不在於策略執行不力。</p>
+                        <p>真正的根源，在於你的商業模式缺乏一套「可持續的行為驅動機制」。</p>
+                        <p>你只是在用短期的外部刺激換取暫時的數字，卻從未真正設計過顧客的「內在動機」。</p>
+                    </div>
+                    <div class="note-text">
+                        停止無效的投入，真正的解方是「動機設計 (Motivation Design)」
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 全球百大企業 -->
+    <section class="top-enterprise-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title mb-1">全球百大企業</div>
+                    <div class="section-sub-title">遊戲化策略大師</div>
+                    <div class="img-box">
+                        <img class="img-fluid" src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/instructor-intro.png" alt="全球百大企業-遊戲化策略大師 周郁凱">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="top-info-box">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 mt-4">
+                        <div class="top-item-box">
+                            <div class="item">
+                                <span class="item-arrow">▶</span>
+                            </div>
+                            <div class="item">
+                                <p>八角框架 (Octalysis Framework) 原創者</p>
+                                <small>獲 3,400+ 研究引用</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-4">
+                        <div class="top-item-box">
+                            <div class="item">
+                                <span class="item-arrow">▶</span>
+                            </div>
+                            <div class="item">
+                                <p>顧問合作遍及 Google、Tesla、Uber、P&G、英國政府等全球頂尖組織</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-4">
+                        <div class="top-item-box">
+                            <div class="item">
+                                <span class="item-arrow">▶</span>
+                            </div>
+                            <div class="item">
+                                <p>著作《遊戲化實戰全書》翻譯多國語言</p>
+                                <small>為遊戲化入門經典</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-4">
+                        <div class="top-item-box">
+                            <div class="item">
+                                <span class="item-arrow">▶</span>
+                            </div>
+                            <div class="item">
+                                <p>連續獲選「全球最具影響力遊戲化大師」第一名</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-4">
+                        <div class="top-play-box">
+                            <div class="top-play-title">
+                                他讓世界重新認識「玩」的商業價值，影響超過 15 億人。
+                            </div>
+                            <p>不是遊戲，卻能設計讓人上癮的參與流程。</p>
+                            <p>設計驅動行為，機制自動啟動，顧客自然回流。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 全球頂尖企業都在用的 -->
+    <section class="top-global-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-info-title">台灣首堂線下實體課程</div>
+                    <div class="section-title mb-1">全球頂尖企業都在用的</div>
+                    <div class="section-sub-title">動機設計框架</div>
+                    <p>過往，周郁凱老師只為國際企業提供千萬級顧問服務。<br>這一次，他與 PressPlay 攜手合作，首次將完整的八角框架方法論帶到台灣，以實體課程的形式<br>讓台灣企業家也能親身體驗這套改變全球商業思維的系統。</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <div class="logo-box">
+                        <img class="img-fluid" src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/logo-samsung.jpg" alt="samsung">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="logo-box">
+                        <img class="img-fluid" src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/logo-pg.jpg" alt="PG">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="logo-box">
+                        <img class="img-fluid" src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/logo-uber.jpg" alt="uber">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="logo-box">
+                        <img class="img-fluid" src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/logo-google.jpg" alt="google">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="logo-box">
+                        <img class="img-fluid" src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/logo-starbucks.jpg" alt="starbucks">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="logo-box">
+                        <img class="img-fluid" src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/logo-tesla.jpg" alt="tesla">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="logo-box">
+                        <img class="img-fluid" src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/logo-harvard.jpg" alt="harvard">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="logo-box">
+                        <img class="img-fluid" src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/logo-microsoft.jpg" alt="microsoft">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mt-4">
+                    <div class="top-play-box mt-4">
+                        <div class="top-play-title">
+                            首次在台灣開啟這樣的實體課程
+                        </div>
+                        <p>與國際級大師面對面學習，掌握全球頂尖企業都在用的行為驅動系統</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 一線決策者的一致推薦 -->
+     <section class="recommend-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title mb-4">一線決策者的一致推薦</div>
+                </div>
+                <div class="col-12 col-md-6 mt-4">
+                    <div class="top-item-box">
+                        <div class="item-info">
+                            <div class="img-box">
+                                <img src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/google-logo.png" alt="">
+                            </div>
+                            <div class="company-info-box">
+                                <div class="company-name">Google</div>
+                                <div class="name">Susie Wee</div>
+                                <div class="company-level">Google Core Experiences 副總裁</div>
+                            </div>
+                        </div>
+                        <p>"八角動機是一個強大且務實的框架，用於理解人類本性和鼓勵人們做到最好工作的正向動機。"</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-4">
+                    <div class="top-item-box">
+                        <div class="item-info">
+                            <div class="img-box">
+                                <img src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/aig-logo.png" alt="">
+                            </div>
+                            <div class="company-info-box">
+                                <div class="company-name">AIG</div>
+                                <div class="name">Paul Brown</div>
+                                <div class="company-level">美國國際集團 (AIG) 首席承保官</div>
+                            </div>
+                        </div>
+                        <p>"周郁凱向我們展示，遊戲化是關於以客戶為中心的思考，最終結果是為組織帶來更大的價值。"</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-4">
+                    <div class="top-item-box">
+                        <div class="item-info">
+                            <div class="img-box">
+                                <img src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/huawei-logo.png" alt="">
+                            </div>
+                            <div class="company-info-box">
+                                <div class="company-name">Huawei</div>
+                                <div class="name">Dr. Jianming Dong</div>
+                                <div class="company-level">華為首席用戶體驗架構師</div>
+                            </div>
+                        </div>
+                        <p>"周郁凱的八角動機框架是任何產品和服務設計中遊戲化的關鍵。"</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-4">
+                    <div class="top-item-box">
+                        <div class="item-info">
+                            <div class="img-box">
+                                <img src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/microsoft-logo.png" alt="">
+                            </div>
+                            <div class="company-info-box">
+                                <div class="company-name">Microsoft</div>
+                                <div class="name">David Ku</div>
+                                <div class="company-level">微軟人工智慧與研究前技術長裁</div>
+                            </div>
+                        </div>
+                        <p>"結合了實用見解和遊戲的力量，以促進自我發現和持續成長。周郁凱為所有渴望將遊戲化並釋放其全部潛力的人提供了一份實用指南。"</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-4">
+                    <div class="top-item-box">
+                        <div class="item-info">
+                            <div class="img-box">
+                                <img src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/zoom-logo.png" alt="">
+                            </div>
+                            <div class="company-info-box">
+                                <div class="company-name">Zoom</div>
+                                <div class="name">Eric S Yuan</div>
+                                <div class="company-level">Zoom 創辦人兼執行長</div>
+                            </div>
+                        </div>
+                        <p>"在 Zoom，我的使命一直是為我的員工和客戶帶來幸福。回顧地，周郁凱的八角框架為任何希望在個人和職業生活中注入更多幸福的人提供了一條玩樂卻又強大的路線圖。"</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-4">
+                    <div class="top-item-box">
+                        <div class="item-info">
+                            <div class="img-box">
+                                <img src="https://static.pressplay.cc/static/uploads/ics/workshop/ED6F22A871CFB003832A038A8D28779E/comiccon-logo.png" alt="">
+                            </div>
+                            <div class="company-info-box">
+                                <div class="company-name">Comic Con</div>
+                                <div class="name">Gareb Shamus</div>
+                                <div class="company-level">Comic Con 和 Wizard Entertainment 創辦人</div>
+                            </div>
+                        </div>
+                        <p>"周郁凱扮演著導師的角色，透過他有條理的發述過程，引領大家走上屬於自己的英雄之旅。"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+
+    <!-- 兩天，你將帶走驅動企業未來十年的 -->
+    <section class="ten-year-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title mb-1">兩天，你將帶走驅動企業未來十年的</div>
+                    <div class="section-sub-title">五大成長槓桿</div>
+                    <p>我們不談理論，只談「成果」。<br>這套系統將從根本上改變你的商業思維，讓你從「追求營收」轉變為「設計營收」。</p>
+                </div>
+                <div class="col-12 col-md-4 mt-4">
+                    <div class="ten-year-item">
+                        <div class="ten-main-top">
+                            <div class="top-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                            </div>
+                            <div class="top-number">
+                                <span>1</span>
+                            </div>
+                        </div>
+                        <div class="item-title">收益模型再設計</div>
+                        <div class="small-text">營收不再靠「打折」</div>
+                        <p>設計讓顧客主動回購的商業行為，將一次性銷售轉化為可持續的獲利模式。</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mt-4">
+                    <div class="ten-year-item">
+                        <div class="ten-main-top">
+                            <div class="top-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
+                            </div>
+                            <div class="top-number">
+                                <span>2</span>
+                            </div>
+                        </div>
+                        <div class="item-title">打造循環成長系統</div>
+                        <div class="small-text">行銷報酬最大化</div>
+                        <p>讓每次互動都成為下一次參與的起點，創造複利式的顧客終身價值。</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mt-4">
+                    <div class="ten-year-item">
+                        <div class="ten-main-top">
+                            <div class="top-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                            </div>
+                            <div class="top-number">
+                                <span>3</span>
+                            </div>
+                        </div>
+                        <div class="item-title">驅動顧客內在動機</div>
+                        <div class="small-text">讓他「想買」而非「被推銷」</div>
+                        <p>在顧客心中建立「成就體驗」與「價值連結」，自然提升品牌忠誠度。</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mt-4">
+                    <div class="ten-year-item">
+                        <div class="ten-main-top">
+                            <div class="top-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div class="top-number">
+                                <span>4</span>
+                            </div>
+                        </div>
+                        <div class="item-title">重塑團隊驅動力</div>
+                        <div class="small-text">以心理驅動取代外部激勵</div>
+                        <p>建立能自我激勵的銷售團隊，讓銷售能量維持在高峰。</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mt-4">
+                    <div class="ten-year-item">
+                        <div class="ten-main-top">
+                            <div class="top-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+                            </div>
+                            <div class="top-number">
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <div class="item-title">建立可複製的系統</div>
+                        <div class="small-text">將公司轉化為獲利機制</div>
+                        <p>讓企業成長不再靠靈感，而是靠一套能自動滾動、持續放大的系統。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 一場無法複製的沉浸式策略體驗 -->
+    <section class="experience-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title mb-1">一場無法複製的沉浸式策略體驗</div>
+                    <p>這兩天一夜，你將徹底隔絕外界干擾，與周郁凱老師及 29 位頂尖企業家共同深度思考、密集實戰。<br>這是一場「封閉式、沉浸式、實戰導向」的學習，確保你帶著問題來，帶著系統化的解決方案走。</p>
+                </div>
+                <div class="col-12">
+                    <div class="top-item-box">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                        </div>
+                        <div class="content-box">
+                            <div class="content-main">
+                                <div class="day-box">Day 1</div>
+                                <div class="content-desc">動機設計與商業模式重構</div>
+                                <ul>
+                                    <li>
+                                        <div class="time-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        </div>
+                                        <div class="time-info">
+                                            <div class="time">上午</div>
+                                            <div class="desc">八角框架深度解析與商業應用</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="time-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        </div>
+                                        <div class="time-info">
+                                            <div class="time">下午</div>
+                                            <div class="desc">企業核心診斷與收益模型實戰工作坊</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="time-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        </div>
+                                        <div class="time-info">
+                                            <div class="time">晚上</div>
+                                            <div class="desc">策略晚宴與深度交流</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-item-box">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                        </div>
+                        <div class="content-box">
+                            <div class="content-main">
+                                <div class="day-box">Day 2</div>
+                                <div class="content-desc">行為驅動與組織賦能</div>
+                                <ul>
+                                    <li>
+                                        <div class="time-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        </div>
+                                        <div class="time-info">
+                                            <div class="time">上午</div>
+                                            <div class="desc">顧客與員工行為循環設計</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="time-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        </div>
+                                        <div class="time-info">
+                                            <div class="time">下午</div>
+                                            <div class="desc">企業成長藍圖發表與講師親自點評</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="date-box text-center">
+                        <ul>
+                            <li>
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                </div>
+                                <p>頂級商務飯店</p>
+                            </li>
+                            <li>
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                                </div>
+                                <p>12/26-12/27</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 這不是一門課，而是一場 -->
+    <section class="strategy-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title mb-1">這不是一門課，而是一場</div>
+                    <div class="section-sub-title">企業成長策略峰會</div>
+                    <p>NT$ 25,000 不只是一筆學費<br>而是一套能讓你的團隊自動運轉、業績持續成長的「行為驅動系統」投資。</p>
+                </div>
+                <div class="col-12">
+                    <div class="strategy-item-box">
+                        <div class="top-item-title">
+                            您的席位包含
+                        </div>
+                        <ul>
+                            <li>
+                                <div class="icon-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                                </div>
+                                <div class="strategy-info">
+                                    <div class="title-info">
+                                        <div class="title-main">
+                                            兩日完整遊戲化策略課程
+                                        </div>
+                                        <div class="title-price">
+                                            NT$ 80,000+
+                                        </div>
+                                    </div>
+                                    <div class="strategy-desc">
+                                        周郁凱老師千萬級顧問服務的完整濃縮，學習如何用遊戲化思維重新設計你的商業模式
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                                </div>
+                                <div class="strategy-info">
+                                    <div class="title-info">
+                                        <div class="title-main">
+                                            團隊動機設計工具包
+                                        </div>
+                                        <div class="title-price">
+                                            NT$ 15,000
+                                        </div>
+                                    </div>
+                                    <div class="strategy-desc">
+                                        可立即應用的八角框架分析模板、員工激勵設計表、顧客行為循環圖，讓你回去就能開始改造團隊
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                                </div>
+                                <div class="strategy-info">
+                                    <div class="title-info">
+                                        <div class="title-main">
+                                            企業診斷與實戰演練
+                                        </div>
+                                        <div class="title-price">
+                                            NT$ 20,000
+                                        </div>
+                                    </div>
+                                    <div class="strategy-desc">
+                                        針對你的企業進行現場診斷，設計專屬的行為驅動機制，並獲得周郁凱老師的親自點評
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                                </div>
+                                <div class="strategy-info">
+                                    <div class="title-info">
+                                        <div class="title-main">
+                                            兩天一夜食宿全包
+                                        </div>
+                                        <div class="title-price">
+                                            NT$ 8,000
+                                        </div>
+                                    </div>
+                                    <div class="strategy-desc">
+                                        專注學習無後顧之憂，包含住宿與餐飲，讓你全心投入策略思考
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                                </div>
+                                <div class="strategy-info">
+                                    <div class="title-info">
+                                        <div class="title-main">
+                                            頂尖企業家人脈網絡
+                                        </div>
+                                        <div class="title-price">
+                                            無價
+                                        </div>
+                                    </div>
+                                    <div class="strategy-desc">
+                                        與 30 位來自各領域的決策者深度交流，建立長期合作與學習夥伴關係
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="top-play-box mt-4">
+                            <div class="top-play-title">
+                                總價值超過 NT$ 123,000
+                            </div>
+                            <p>但您真正獲得的，是一套讓團隊主動創造結果、業績持續成長的「遊戲化經營系統」</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 唯一的方案，專為決策者設計 -->
+    <section class="only-reward-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title mb-1">唯一的方案，專為決策者設計</div>
+                    <div class="section-sub-title">企業成長策略席位</div>
+                </div>
+                <div class="col-12">
+                    <div class="reward-item-box">
+                        <div class="reward-title">
+                            NT$ 25,000 <span>/ 人</span>
+                        </div>
+                        <div class="limit-info my-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            全球限量 30 席
+                        </div>
+                        <div class="reward-text">
+                            <p>為確保最高學習品質與深度互動，本次成長營採精緻化、高強度的模式進行。</p>
+                            <p>一旦額滿，立即關閉報名通道，絕不接受任何形式的加開請求。</p>
+                        </div>
+                        <a href="javascript:;" class="info-btn my-4">
+                            立即鎖定最後席位 <i class="las la-arrow-right"></i>
+                        </a>
+                        <div class="safe-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <p>安心報名，符合條件可全額退款</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 你與世界頂級的商業思維 -->
+    <section class="top-world-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title mb-1">你與世界頂級的商業思維</div>
+                    <div class="section-sub-title">只差一個決定的距離</div>
+                    <p>當你的競爭對手還在思考下一季的折扣方案時，你已經在設計一套讓顧客持續買單的自動化系統。<br>這是一個極少數人能參與的策略閉門會議，也是你為企業佈局未來十年成長的關鍵一步。</p>
+                    <div class="text-box">
+                        機會，只留給迅速行動的決策者。
+                    </div>
+                    <a href="javascript:;" class="info-btn my-4">
+                        立即鎖定最後席位，徹底擺脫成長焦慮 <i class="las la-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <p>八角框架 經營實戰成長營</p>
+        <div class="copy-right">
+            © 2025 All rights reserved.
+        </div>
+    </footer>
+
+    <script src="/js/index.js"></script>
+</body>
+</html>
