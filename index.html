@@ -14,20 +14,36 @@
         <div class="bg-box"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-lg-6">
-                    <div class="radar" id="radarRoot">
-                        <canvas id="radarCanvas"></canvas>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-6">
+                <!-- mobile -->
+                <div class="col-md-12 d-lg-none">
                     <div class="info-box">
                         <div class="info-limit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
                             限額 30 位企業決策者
                         </div>
                         <div class="info-title">
-                            <p class="h1">八角框架</p>
-                            <p class="h1">經營實戰成長營</p>
+                            <p class="h1">八角框架<span class="white">經營實戰成長營</span></p>
+                        </div>
+                        <div class="info-desc">
+                            <p>用遊戲化思維，讓營收成長、顧客買單、團隊主動創造結果</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- canvas -->
+                <div class="col-md-12 col-lg-6">
+                    <div class="radar" id="radarRoot">
+                        <canvas id="radarCanvas"></canvas>
+                    </div>
+                </div>
+                <!-- pc -->
+                <div class="col-md-6 d-none col-lg-5 offset-lg-1 d-lg-block">
+                    <div class="info-box">
+                        <div class="info-limit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
+                            限額 30 位企業決策者
+                        </div>
+                        <div class="info-title">
+                            <p class="h1">八角框架<span class="white d-block">經營實戰成長營</span></p>
                         </div>
                         <div class="info-desc">
                             <p>用遊戲化思維，讓營收成長、顧客買單、團隊主動創造結果</p>
@@ -64,7 +80,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-md-12 d-none">
+                <!-- mobile -->
+                <div class="col-md-12 mt-4 d-lg-none">
                     <div class="info-time-box">
                         <p>這不只是一堂課，而是將你企業的「營收公式」重新設計的兩天一夜策略峰會</p>
                         <div class="time-box" data-deadline="2025-11-15 23:59:59">

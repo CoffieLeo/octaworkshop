@@ -44,7 +44,31 @@ html, body {
   height: 600px;
   overflow: visible;
   margin-top: 2rem;
+  transform-origin: center center;
 }
+@media (max-width: 575px) {
+  .radar {
+    transform: scale(0.7);
+    height: 400px;
+  }
+}
+@media (min-width: 576px) {
+  .radar {
+    transform: scale(0.88);
+    height: 400px;
+  }
+}
+@media (min-width: 768px) {
+  .radar {
+    transform: scale(0.95);
+  }
+}
+@media (min-width: 992px) {
+  .radar {
+    transform: scale(1);
+  }
+}
+
 canvas {
   display: block;
   width: 100%;
@@ -87,14 +111,6 @@ canvas {
   color: #aeb8ff;
   display: block;
   line-height: 1.1;
-}
-.label .connector {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #fff;
-  opacity: 0.06;
-  margin: 6px auto 0;
 }
 
 @keyframes fadeHighlight {
@@ -229,16 +245,16 @@ section p {
   font-size: 2.5rem;
   font-weight: 700;
 }
-.info-box .info-title p:first-child {
+.info-box .info-title p.h1 {
   color: #6886ff;
-}
-.info-box .info-title p:last-child {
-  color: #d0cdcb;
 }
 @media (min-width: 768px) {
   .info-box .info-title p {
     font-size: 3.75rem;
   }
+}
+.info-box .info-title .white {
+  color: #d0cdcb;
 }
 
 .info-desc p {

@@ -76,7 +76,7 @@ function createLabels() {
         L.appendChild(box);
         // 可選連接小點
         const con = document.createElement('div');
-        con.className = 'connector';
+        // con.className = 'connector';
         L.appendChild(con);
         root.appendChild(L);
         labelEls.push(L);
