@@ -48,24 +48,7 @@ html, body {
 }
 @media (max-width: 575px) {
   .radar {
-    transform: scale(0.7);
-    height: 400px;
-  }
-}
-@media (min-width: 576px) {
-  .radar {
-    transform: scale(0.88);
-    height: 400px;
-  }
-}
-@media (min-width: 768px) {
-  .radar {
-    transform: scale(0.95);
-  }
-}
-@media (min-width: 992px) {
-  .radar {
-    transform: scale(1);
+    height: 300px;
   }
 }
 
