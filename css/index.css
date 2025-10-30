@@ -237,6 +237,7 @@ section p {
   }
 }
 .info-box .info-title .white {
+  display: block;
   color: #d0cdcb;
 }
 
