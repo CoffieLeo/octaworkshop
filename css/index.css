@@ -142,7 +142,7 @@ section p {
 
 .section-title {
   color: var(--section-title);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   opacity: 0.8;
   margin-bottom: 2rem;
@@ -246,13 +246,8 @@ section p {
 
 .info-desc p {
   color: var(--font-color);
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 700;
-}
-@media (min-width: 768px) {
-  .info-desc p {
-    font-size: 1.25rem;
-  }
 }
 
 .info-time-box {
@@ -315,7 +310,7 @@ section p {
   border: 1px solid var(--box-border);
   border-left: 4px solid #2346dd;
   background: rgba(8, 10, 20, 0.65);
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 700;
 }
 @media (min-width: 768px) {
