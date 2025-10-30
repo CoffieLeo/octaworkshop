@@ -258,9 +258,6 @@ function drawOctagonBase(){
 function drawHighlightSegment(elapsed){
     const cycle = Math.floor(elapsed / segmentDuration);
     const idx = cycle % N;
-    highlightIndex = idx; // 更新目前高亮索引
-    updateLabelVisibility(); // 💡 依裝置更新顯示
-
     const t = (elapsed % segmentDuration) / segmentDuration;
     const a = points[idx];
     const b = points[(idx+1)%N];
@@ -270,41 +267,84 @@ function drawHighlightSegment(elapsed){
     const ex = sx + (b.x - a.x) * t;
     const ey = sy + (b.y - a.y) * t;
 
+    // 🔹 小螢幕模式：一次只顯示一個，淡入淡出效果
+    if (window.innerWidth < 576) {
+        for (let i = 0; i < labelEls.length; i++) {
+            const el = labelEls[i];
+            if (i === idx) {
+                el.style.opacity = '1';
+                el.style.pointerEvents = 'auto';
+            } else {
+                el.style.opacity = '0';
+                el.style.pointerEvents = 'none';
+            }
+            // 置中底部
+            el.style.position = 'absolute';
+            el.style.left = '50%';
+            el.style.top = '-30px';
+            el.style.transform = 'translate(-50%, 0)';
+            el.classList.add('highlight');
+        }
+    } else {
+        // 🔹 大螢幕模式：全部顯示，只有當前高亮
+        for (let i = 0; i < labelEls.length; i++) {
+            const el = labelEls[i];
+            el.style.opacity = '1';
+            el.style.pointerEvents = 'auto';
+            if (i === idx) el.classList.add('highlight');
+            else el.classList.remove('highlight');
+        }
+    }
+
+    // --- 高亮線條繪製 ---
     ctx.save();
     ctx.lineWidth = 6;
     ctx.lineCap = 'round';
     ctx.shadowBlur = 18;
     ctx.shadowColor = col;
-    const g = ctx.createLinearGradient(sx,sy,ex,ey);
+    const g = ctx.createLinearGradient(sx, sy, ex, ey);
     g.addColorStop(0, 'rgba(120,170,255,0.98)');
     g.addColorStop(1, col);
     ctx.strokeStyle = g;
     ctx.beginPath();
-    ctx.moveTo(sx,sy);
-    ctx.lineTo(ex,ey);
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(ex, ey);
     ctx.stroke();
     ctx.restore();
 
+    // 淡淡輔助線
+    ctx.save();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(120,140,220,0.14)';
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(ex, ey);
+    ctx.stroke();
+    ctx.restore();
+
+    // 放射線與光點
     ctx.save();
     ctx.lineWidth = 2.2;
     ctx.shadowBlur = 14;
     ctx.shadowColor = col;
-    const g2 = ctx.createLinearGradient(cx,cy,ex,ey);
+    const g2 = ctx.createLinearGradient(cx, cy, ex, ey);
     g2.addColorStop(0, 'rgba(40,50,80,0.15)');
     g2.addColorStop(1, col);
     ctx.strokeStyle = g2;
     ctx.beginPath();
-    ctx.moveTo(cx,cy);
-    ctx.lineTo(ex,ey);
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(ex, ey);
     ctx.stroke();
     ctx.fillStyle = col;
     ctx.globalAlpha = 0.95;
     ctx.beginPath();
-    ctx.arc(ex,ey,8,0,Math.PI*2);
+    ctx.arc(ex, ey, 8, 0, Math.PI * 2);
     ctx.fill();
     ctx.globalAlpha = 1;
     ctx.restore();
 }
+
+
 
 function drawNodes(){
     for (let i=0;i<N;i++){
