@@ -386,28 +386,35 @@ window.addEventListener('resize', () => {
 
 // 倒數計時
 // 設定目標時間
-const deadline = new Date("2025-11-15 23:59:59").getTime();
+function startCountdown(box) {
+  const deadline = new Date(box.dataset.deadline).getTime();
 
-// 每秒更新倒數
-const timer = setInterval(() => {
+  const daysEl = box.querySelector(".days");
+  const hoursEl = box.querySelector(".hours");
+  const minutesEl = box.querySelector(".minutes");
+  const secondsEl = box.querySelector(".seconds");
+
+  const timer = setInterval(() => {
     const now = new Date().getTime();
     const distance = deadline - now;
 
     if (distance <= 0) {
-        clearInterval(timer);
-        document.querySelector(".time-box").innerHTML = "<p>倒數結束！</p>";
-        return;
+      clearInterval(timer);
+      box.innerHTML = "<p>倒數結束！</p>";
+      return;
     }
 
-    // 計算天、時、分、秒
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // 更新畫面
-    document.querySelector(".days").textContent = String(days).padStart(2, "0");
-    document.querySelector(".hours").textContent = String(hours).padStart(2, "0");
-    document.querySelector(".minutes").textContent = String(minutes).padStart(2, "0");
-    document.querySelector(".seconds").textContent = String(seconds).padStart(2, "0");
-}, 1000);
+    daysEl.textContent = String(days).padStart(2, "0");
+    hoursEl.textContent = String(hours).padStart(2, "0");
+    minutesEl.textContent = String(minutes).padStart(2, "0");
+    secondsEl.textContent = String(seconds).padStart(2, "0");
+  }, 1000);
+}
+
+// 🔥 啟動所有 time-box
+document.querySelectorAll(".time-box").forEach(startCountdown);
